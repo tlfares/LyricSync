@@ -13,7 +13,7 @@ Import a song, get lyrics with timestamps, and export ready-to-use files for any
 - **Import any audio file** — M4A, MP3, WAV, AIFF
 - **Transcription** — On-device (Apple Speech) or Mistral AI Voxtral
 - **Smart punctuation** — Mistral LLM perfects punctuation and line breaks where natural
-- **Paste existing lyrics** — You can also paste your own text to sync it.
+- **Paste existing lyrics** — You can also paste your own text (one verse per line) to sync it.
 - **Export M4A** with embedded lyrics, sideloadable to the iOS Music app (but NOT synced as Apple refuses to display any synced lyrics for non-AppleMusic songs).
 - **Export LRC** *(Universal text file format for timestamped lyrics)* for any media player that supports them.
 - **Edit lyrics** after transcription — fix any mistakes inline
