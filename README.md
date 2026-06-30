@@ -32,3 +32,15 @@ Download the latest release:
 - **macOS**: `LyricSync.app` — unzip and drag to Applications
 
 > Speech recognition requires a physical device — not available in the iOS simulator.
+
+<details>
+<summary><b>Screenshots</b></summary>
+
+<div style="display: flex; gap: 10px; overflow-x: auto; padding: 10px 0;">
+  <img src="Screenshots/import.png" width="250" alt="Import">
+  <img src="Screenshots/transcription.png" width="250" alt="Transcription">
+  <img src="Screenshots/export.png" width="250" alt="Export">
+  <img src="Screenshots/settings.png" width="250" alt="Settings">
+</div>
+
+</details>
