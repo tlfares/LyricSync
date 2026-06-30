@@ -16,14 +16,14 @@ struct ImportView: View {
                 .font(.largeTitle)
                 .bold()
 
-            Text("Importez un fichier audio pour transcrire\nautomatiquement les paroles")
+            Text("Import an audio file to automatically\ntranscribe the lyrics")
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.secondary)
 
             Button {
                 viewModel.showFilePicker = true
             } label: {
-                Label("Choisir un fichier audio", systemImage: "doc.badge.plus")
+                Label("Choose an audio file", systemImage: "doc.badge.plus")
                     .frame(maxWidth: .infinity)
                     .padding()
                     .background(Color.accentColor)
@@ -34,7 +34,7 @@ struct ImportView: View {
 
             if let song = viewModel.song {
                 VStack(alignment: .leading, spacing: 8) {
-                    Label("Fichier importé", systemImage: "checkmark.circle.fill")
+                    Label("File imported", systemImage: "checkmark.circle.fill")
                         .foregroundStyle(.green)
                         .font(.headline)
                     Text(song.title)

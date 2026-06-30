@@ -10,10 +10,10 @@ actor AudioService {
 
         var errorDescription: String? {
             switch self {
-            case .importFailed: return "Échec de l'import du fichier audio"
-            case .conversionFailed: return "Échec de la conversion audio"
-            case .noAudioTrack: return "Aucune piste audio trouvée"
-            case .unsupportedFormat: return "Format audio non supporté"
+            case .importFailed: return "Failed to import audio file"
+            case .conversionFailed: return "Audio conversion failed"
+            case .noAudioTrack: return "No audio track found"
+            case .unsupportedFormat: return "Unsupported audio format"
             }
         }
     }

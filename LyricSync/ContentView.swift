@@ -26,11 +26,11 @@ struct ContentView: View {
 
             SettingsView(viewModel: viewModel)
                 .tabItem {
-                    Label("Réglages", systemImage: "gearshape")
+                    Label("Settings", systemImage: "gearshape")
                 }
                 .tag(3)
         }
-        .alert("Erreur", isPresented: .init(
+        .alert("Error", isPresented: .init(
             get: { viewModel.error != nil },
             set: { if !$0 { viewModel.error = nil } }
         )) {

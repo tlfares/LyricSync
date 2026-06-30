@@ -48,7 +48,7 @@ struct TranscriptionView: View {
                         .font(.system(size: 50))
                         .foregroundStyle(.tint)
 
-                    Text("Prêt à transcrire")
+                    Text("Ready to transcribe")
                         .font(.title2)
                         .bold()
 
@@ -58,7 +58,7 @@ struct TranscriptionView: View {
                         .padding(.horizontal)
 
                     Toggle(isOn: $viewModel.usePastedLyrics) {
-                        Label("J'ai déjà les paroles", systemImage: "doc.text")
+                        Label("I already have the lyrics", systemImage: "doc.text")
                     }
                     .padding(.horizontal)
 
@@ -68,7 +68,7 @@ struct TranscriptionView: View {
                             .frame(height: 200)
                             .overlay {
                                 if viewModel.pastedLyrics.isEmpty {
-                                    Text("Collez les paroles ici, un vers par ligne…")
+                                    Text("Paste the lyrics here, one line per verse…")
                                         .foregroundStyle(.tertiary)
                                         .allowsHitTesting(false)
                                 }
@@ -81,16 +81,16 @@ struct TranscriptionView: View {
                             .padding(.horizontal)
 
                         if !viewModel.pastedLyrics.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                            Text("\(viewModel.parsePastedLyrics().count) vers détectés")
+                            Text("\(viewModel.parsePastedLyrics().count) verses detected")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
                     }
 
-                    Picker("Langue", selection: quickLang) {
-                        Text("Français").tag(QuickLang.french)
+                    Picker("Language", selection: quickLang) {
+                        Text("French").tag(QuickLang.french)
                         Text("English").tag(QuickLang.english)
-                        Text("Autre…").tag(QuickLang.other)
+                        Text("Other…").tag(QuickLang.other)
                     }
                     .pickerStyle(.segmented)
                     .padding(.horizontal)
@@ -105,7 +105,7 @@ struct TranscriptionView: View {
                         viewModel.startTranscription()
                     } label: {
                         Label(
-                            viewModel.usePastedLyrics ? "Synchroniser les paroles" : "Lancer la transcription",
+                            viewModel.usePastedLyrics ? "Sync with audio" : "Start transcription",
                             systemImage: "play.fill"
                         )
                             .frame(maxWidth: .infinity)
@@ -136,13 +136,13 @@ struct TranscriptionView: View {
                                 }
                             }
                         }
-                        .navigationTitle("Choisir la langue")
+                        .navigationTitle("Choose a language")
                         #if os(iOS)
                         .navigationBarTitleDisplayMode(.inline)
                         #endif
                         .toolbar {
                             ToolbarItem(placement: .cancellationAction) {
-                                Button("Annuler") { showLanguageSheet = false }
+                                Button("Cancel") { showLanguageSheet = false }
                             }
                         }
                     }
@@ -150,9 +150,9 @@ struct TranscriptionView: View {
                 }
             } else {
                 ContentUnavailableView(
-                    "Aucune chanson importée",
+                    "No song imported",
                     systemImage: "music.note",
-                    description: Text("Importez d'abord un fichier audio depuis l'onglet Import")
+                    description: Text("Import an audio file first from the Import tab")
                 )
             }
         }
@@ -172,13 +172,13 @@ struct TranscriptionView: View {
                             Spacer()
 
                             if line.confidence < 0.5 {
-                                Label("faible", systemImage: "exclamationmark.triangle.fill")
+                                Label("low", systemImage: "exclamationmark.triangle.fill")
                                     .font(.caption2)
                                     .foregroundStyle(.orange)
                             }
                         }
 
-                        TextField("Parole", text: Binding(
+                        TextField("Lyric", text: Binding(
                             get: { line.text },
                             set: { viewModel.updateLyricLine(id: line.id, newText: $0) }
                         ), axis: .vertical)
@@ -191,9 +191,9 @@ struct TranscriptionView: View {
                 }
             } header: {
                 HStack {
-                    Text("Paroles synchronisées")
+                    Text("Synced lyrics")
                     Spacer()
-                    Text("\(song.lyrics.count) lignes")
+                    Text("\(song.lyrics.count) lines")
                         .foregroundStyle(.secondary)
                 }
             }
@@ -206,7 +206,7 @@ struct TranscriptionView: View {
         .toolbar {
             ToolbarItemGroup(placement: .keyboard) {
                 Spacer()
-                Button("Terminé") { focusedLineID = nil }
+                                Button("Done") { focusedLineID = nil }
             }
         }
     }

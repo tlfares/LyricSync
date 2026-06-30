@@ -16,9 +16,9 @@ struct ExportView: View {
                 progressView
             } else {
                 ContentUnavailableView(
-                    "Aucun fichier exporté",
+                    "No file exported",
                     systemImage: "square.and.arrow.up",
-                    description: Text("Transcrivez d'abord une chanson, puis exportez-la")
+                    description: Text("Transcribe a song first, then export it")
                 )
             }
         }
@@ -45,7 +45,7 @@ struct ExportView: View {
                 .font(.title2)
                 .bold()
 
-            Picker("Format", selection: $viewModel.exportMode) {
+            Picker("Export", selection: $viewModel.exportMode) {
                 ForEach(TranscriptionViewModel.ExportMode.allCases) { mode in
                     Text(mode.displayName).tag(mode)
                 }
@@ -55,14 +55,14 @@ struct ExportView: View {
 
             VStack(alignment: .leading, spacing: 8) {
                 Label {
-                    Text("\(song.lyrics.count) lignes de paroles")
+                    Text("\(song.lyrics.count) lyric lines")
                 } icon: {
                     Image(systemName: "text.alignleft")
                 }
 
                 if viewModel.exportMode != .lrcOnly {
                     Label {
-                        Text("M4A avec paroles embarquées (Apple Music)")
+                        Text("M4A with embedded lyrics (Apple Music)")
                     } icon: {
                         Image(systemName: "iphone")
                     }
@@ -70,7 +70,7 @@ struct ExportView: View {
 
                 if viewModel.exportMode != .m4aOnly {
                     Label {
-                        Text("LRC pour lecteurs génériques")
+                        Text("LRC for generic players")
                     } icon: {
                         Image(systemName: "doc.text")
                     }
@@ -84,7 +84,7 @@ struct ExportView: View {
             Button {
                 viewModel.exportWithLyrics()
             } label: {
-                Label("Exporter \(viewModel.exportMode.displayName)", systemImage: "square.and.arrow.up")
+                Label("Export \(viewModel.exportMode.displayName)", systemImage: "square.and.arrow.up")
                     .frame(maxWidth: .infinity)
                     .padding()
                     .background(Color.accentColor)
@@ -115,13 +115,13 @@ struct ExportView: View {
                 .font(.system(size: 70))
                 .foregroundStyle(.green)
 
-            Text("Fichier\(showM4A && showLRC ? "s" : "") prêt\(showM4A && showLRC ? "s" : "") !")
+            Text("File\(showM4A && showLRC ? "s" : "") ready!")
                 .font(.title)
                 .bold()
 
             if hasDefaultDir, let url = m4aURL ?? lrcURL {
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("Enregistré dans :")
+                    Text("Saved to:")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                     Text(url.deletingLastPathComponent().path)
@@ -140,7 +140,7 @@ struct ExportView: View {
                     let urls = [m4aURL, lrcURL].compactMap { $0 }
                     NSWorkspace.shared.activateFileViewerSelecting(urls)
                 } label: {
-                    Label("Afficher dans le Finder", systemImage: "folder")
+                    Label("Show in Finder", systemImage: "folder")
                         .frame(maxWidth: .infinity)
                         .padding()
                         .background(Color.accentColor)
@@ -154,7 +154,7 @@ struct ExportView: View {
             if !hasDefaultDir {
                 if showM4A, let url = m4aURL {
                     ShareLink(item: url) {
-                        Label("Partager M4A (Apple Music)", systemImage: "iphone")
+                        Label("Share M4A (Apple Music)", systemImage: "iphone")
                             .frame(maxWidth: .infinity)
                             .padding()
                             .background(Color.accentColor)
@@ -166,7 +166,7 @@ struct ExportView: View {
 
                 if showLRC, let url = lrcURL {
                     ShareLink(item: url) {
-                        Label("Partager LRC", systemImage: "doc.text")
+                        Label("Share LRC", systemImage: "doc.text")
                             .frame(maxWidth: .infinity)
                             .padding()
                             .background(.secondary)

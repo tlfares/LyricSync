@@ -11,11 +11,11 @@ actor LyricsExportService {
 
         var errorDescription: String? {
             switch self {
-            case .exportFailed(let e): return e?.localizedDescription ?? "Échec de l'export"
-            case .noAudioTrack: return "Aucune piste audio trouvée"
-            case .writerSetupFailed: return "Impossible de créer le fichier de sortie"
-            case .readerSetupFailed: return "Impossible de lire le fichier source"
-            case .passthroughFailed: return "Impossible d'exporter sans ré-encodage"
+            case .exportFailed(let e): return e?.localizedDescription ?? "Export failed"
+            case .noAudioTrack: return "No audio track found"
+            case .writerSetupFailed: return "Cannot create output file"
+            case .readerSetupFailed: return "Cannot read source file"
+            case .passthroughFailed: return "Cannot export without re-encoding"
             }
         }
     }

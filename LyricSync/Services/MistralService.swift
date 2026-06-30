@@ -11,11 +11,11 @@ struct MistralService {
 
         var errorDescription: String? {
             switch self {
-            case .noAPIKey: return "Clé API Mistral non configurée"
-            case .networkError(let e): return "Erreur réseau : \(e.localizedDescription)"
-            case .badResponse(let code, let body): return "Mistral a répondu \(code) : \(body)"
-            case .noData: return "Aucune réponse de Mistral"
-            case .parseFailed: return "Impossible de lire la réponse Mistral"
+            case .noAPIKey: return "Mistral API key not configured"
+            case .networkError(let e): return "Network error: \(e.localizedDescription)"
+            case .badResponse(let code, let body): return "Mistral responded \(code): \(body)"
+            case .noData: return "No response from Mistral"
+            case .parseFailed: return "Cannot parse Mistral response"
             }
         }
     }
@@ -108,7 +108,7 @@ struct MistralService {
         }
 
         guard (200...299).contains(httpResponse.statusCode) else {
-            let errorText = String(data: data, encoding: .utf8) ?? "inconnu"
+            let errorText = String(data: data, encoding: .utf8) ?? "unknown"
             throw MistralError.badResponse(httpResponse.statusCode, errorText)
         }
 
@@ -189,7 +189,7 @@ struct MistralService {
         guard let httpResponse = response as? HTTPURLResponse,
               (200...299).contains(httpResponse.statusCode) else {
             let code = (response as? HTTPURLResponse)?.statusCode ?? 0
-            let errorText = String(data: data, encoding: .utf8) ?? "inconnu"
+            let errorText = String(data: data, encoding: .utf8) ?? "unknown"
             throw MistralError.badResponse(code, errorText)
         }
 

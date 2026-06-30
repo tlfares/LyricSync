@@ -11,8 +11,8 @@ class TranscriptionViewModel: ObservableObject {
         var displayName: String {
             switch self {
             case .both: return "M4A + LRC"
-            case .m4aOnly: return "M4A seulement"
-            case .lrcOnly: return "LRC seulement"
+            case .m4aOnly: return "M4A only"
+            case .lrcOnly: return "LRC only"
             }
         }
     }
@@ -22,7 +22,7 @@ class TranscriptionViewModel: ObservableObject {
 
         var errorDescription: String? {
             switch self {
-            case .accessDenied: return "Impossible d'accéder au fichier (permissions insuffisantes)"
+            case .accessDenied: return "Cannot access file (insufficient permissions)"
             }
         }
     }
@@ -68,7 +68,7 @@ class TranscriptionViewModel: ObservableObject {
     func importAudio(url: URL) {
         Task {
             do {
-                progressMessage = "Import du fichier audio..."
+                progressMessage = "Importing audio file..."
                 guard url.startAccessingSecurityScopedResource() else {
                     throw ImportError.accessDenied
                 }
@@ -81,7 +81,7 @@ class TranscriptionViewModel: ObservableObject {
                 let durationSecs = CMTimeGetSeconds(duration ?? .zero)
 
                 var title = url.deletingPathExtension().lastPathComponent
-                var artist = "Artiste inconnu"
+                var artist = "Unknown artist"
 
                 if let metadata = try? await asset.load(.commonMetadata) {
                     for item in metadata {
@@ -100,7 +100,7 @@ class TranscriptionViewModel: ObservableObject {
                     duration: durationSecs
                 )
                 self.song = song
-                progressMessage = "Fichier importé avec succès"
+                progressMessage = "File imported successfully"
             } catch {
                 self.error = error.localizedDescription
             }
@@ -121,7 +121,7 @@ class TranscriptionViewModel: ObservableObject {
 
                 // — Mistral : transcription + timestamps en un appel —
                 if useMistral {
-                    progressMessage = "Transcription avec Mistral..."
+                    progressMessage = "Transcribing with Mistral..."
                     let lyrics = try await MistralService.transcribe(
                         audioURL: song.originalURL,
                         apiKey: mistralSettings.apiKey
@@ -135,11 +135,11 @@ class TranscriptionViewModel: ObservableObject {
                     self.song?.lyrics = lyrics
                 } else {
                     // — Mode normal (Apple uniquement) —
-                    progressMessage = usePastedLyrics ? "Synchronisation en cours..." : "Transcription en cours..."
+                    progressMessage = usePastedLyrics ? "Syncing..." : "Transcribing..."
                     let lyrics = try await TranscriptionService.transcribe(
                         url: song.originalURL,
                         locale: selectedLocale.locale,
-                        contextualStrings: [song.title, song.artist].filter { !$0.isEmpty && $0 != "Artiste inconnu" },
+                        contextualStrings: [song.title, song.artist].filter { !$0.isEmpty && $0 != "Unknown artist" },
                         userLyrics: usePastedLyrics ? parsePastedLyrics() : nil
                     )
                     self.song?.lyrics = lyrics
@@ -148,7 +148,7 @@ class TranscriptionViewModel: ObservableObject {
                 progress = 0.9
                 self.song?.status = .transcribed
                 progress = 1.0
-                progressMessage = "Terminé (\(self.song?.lyrics.count ?? 0) lignes)"
+                progressMessage = "Done (\(self.song?.lyrics.count ?? 0) lines)"
             } catch {
                 self.error = error.localizedDescription
                 self.song?.status = .failed(error.localizedDescription)
@@ -175,7 +175,7 @@ class TranscriptionViewModel: ObservableObject {
 
                 switch exportMode {
                 case .both:
-                    progressMessage = "Export M4A + LRC..."
+                    progressMessage = "Exporting M4A + LRC..."
                     let url = try await exportService.exportWithLyrics(song: song, outputDir: outputDir)
                     exportedM4AURL = url
                     do {
@@ -184,19 +184,19 @@ class TranscriptionViewModel: ObservableObject {
                         exportedLRCURL = nil
                     }
                 case .m4aOnly:
-                    progressMessage = "Export M4A..."
+                    progressMessage = "Exporting M4A..."
                     let url = try await exportService.exportWithLyrics(song: song, outputDir: outputDir)
                     exportedM4AURL = url
                     exportedLRCURL = nil
                 case .lrcOnly:
-                    progressMessage = "Export LRC..."
+                    progressMessage = "Exporting LRC..."
                     let url = try await exportService.exportLRC(song: song, outputDir: outputDir)
                     exportedLRCURL = url
                     exportedM4AURL = nil
                 }
 
                 self.song?.status = .exported
-                progressMessage = "Export terminé !"
+                progressMessage = "Export complete!"
                 showShareSheet = true
             } catch {
                 self.error = error.localizedDescription

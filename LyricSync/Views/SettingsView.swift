@@ -8,7 +8,7 @@ struct SettingsView: View {
         NavigationStack {
             Form {
                 Section {
-                    SecureField("Clé API Mistral", text: $viewModel.mistralSettings.apiKey)
+                    SecureField("Mistral API Key", text: $viewModel.mistralSettings.apiKey)
                         .autocorrectionDisabled()
                         #if os(iOS)
                         .textInputAutocapitalization(.never)
@@ -18,37 +18,37 @@ struct SettingsView: View {
                         HStack {
                             Image(systemName: "checkmark.circle.fill")
                                 .foregroundStyle(.green)
-                            Text("Clé configurée")
+                            Text("Key set")
                                 .foregroundStyle(.secondary)
                         }
                     }
                 } header: {
                     Text("Mistral AI")
                 } footer: {
-                    Text("Mistral est beaucoup plus précis que Apple Speech. Le modèle voxtral-mini retourne directement texte+timestamps, avec un raffinement par LLM pour la ponctuation.")
+                    Text("Mistral is much more accurate than Apple Speech. The voxtral-mini model returns text+timestamps in one call, with LLM refinement for punctuation.")
                 }
 
                 Section {
-                    Toggle("Utiliser Mistral pour la transcription", isOn: $viewModel.mistralSettings.enabled)
+                    Toggle("Use Mistral for transcription", isOn: $viewModel.mistralSettings.enabled)
                         .disabled(viewModel.mistralSettings.apiKey.isEmpty)
                 } footer: {
                     if viewModel.mistralSettings.apiKey.isEmpty {
-                        Text("Entrez d'abord une clé API ci-dessus")
+                        Text("Enter an API key above first")
                     } else {
-                        Text("Quand activé, toute la transcription (texte + timings) est gérée par Mistral. Apple Speech n'est pas utilisé.")
+                        Text("When enabled, all transcription (text + timing) is handled by Mistral. Apple Speech is not used.")
                     }
                 }
 
                 if !viewModel.mistralSettings.apiKey.isEmpty {
                     Section {
-                        Button("Tester la connexion", role: .none) {
+                        Button("Test connection", role: .none) {
                             Task { await testConnection() }
                         }
                         .disabled(viewModel.isTestingConnection)
 
                         if let testResult = viewModel.mistralConnectionTest {
                             Label(
-                                testResult ? "Connexion réussie" : "Échec de la connexion",
+                                testResult ? "Connection successful" : "Connection failed",
                                 systemImage: testResult ? "checkmark.circle" : "xmark.circle"
                             )
                             .foregroundStyle(testResult ? .green : .red)
@@ -57,7 +57,7 @@ struct SettingsView: View {
                 }
 
                 Section {
-                    Button("Supprimer la clé", role: .destructive) {
+                    Button("Delete key", role: .destructive) {
                         viewModel.clearMistralKey()
                     }
                     .disabled(viewModel.mistralSettings.apiKey.isEmpty)
@@ -66,7 +66,7 @@ struct SettingsView: View {
                 #if os(macOS)
                 Section {
                     HStack {
-                        Text("Dossier de sortie")
+                        Text("Output directory")
                         Spacer()
                         Text(viewModel.defaultOutputPath.isEmpty ? "Documents" : viewModel.defaultOutputPath)
                             .foregroundStyle(.secondary)
@@ -74,19 +74,19 @@ struct SettingsView: View {
                             .truncationMode(.middle)
                     }
 
-                    Button("Choisir…") {
+                    Button("Choose…") {
                         showFolderPicker = true
                     }
 
                     if !viewModel.defaultOutputPath.isEmpty {
-                        Button("Réinitialiser", role: .destructive) {
+                        Button("Reset", role: .destructive) {
                             viewModel.defaultOutputPath = ""
                         }
                     }
                 } header: {
                     Text("Export")
                 } footer: {
-                    Text("Les fichiers M4A et LRC seront sauvegardés directement dans ce dossier au lieu d'afficher la feuille de partage.")
+                    Text("M4A and LRC files will be saved directly to this folder instead of showing the share sheet.")
                 }
                 .fileImporter(
                     isPresented: $showFolderPicker,
@@ -99,7 +99,7 @@ struct SettingsView: View {
                 }
                 #endif
             }
-            .navigationTitle("Réglages")
+            .navigationTitle("Settings")
             #if os(macOS)
             .padding(.horizontal)
             #endif

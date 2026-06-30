@@ -13,12 +13,12 @@ final class TranscriptionService: NSObject {
 
         var errorDescription: String? {
             switch self {
-            case .noResult: return "Aucun résultat de transcription"
-            case .recognizerUnavailable: return "Reconnaissance vocale non disponible"
-            case .audioReadFailed: return "Impossible de lire le fichier audio"
-            case .invalidAudio: return "Fichier audio invalide ou vide"
-            case .notAuthorized: return "Autorisation de reconnaissance vocale refusée"
-            case .conversionFailed: return "Impossible de convertir l'audio en 16kHz mono"
+            case .noResult: return "No transcription result"
+            case .recognizerUnavailable: return "Speech recognition not available"
+            case .audioReadFailed: return "Cannot read audio file"
+            case .invalidAudio: return "Invalid or empty audio file"
+            case .notAuthorized: return "Speech recognition authorization denied"
+            case .conversionFailed: return "Cannot convert audio to 16kHz mono"
             }
         }
     }
