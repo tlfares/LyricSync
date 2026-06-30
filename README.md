@@ -41,6 +41,7 @@ Download the latest release:
   <img src="Screenshots/ReadyToTranscribe.png" width="250" alt="Ready to transcribe">
   <img src="Screenshots/EditView.png" width="250" alt="Edit lyrics">
   <img src="Screenshots/ExportView.png" width="250" alt="Export">
+  <img src="Screenshots/Settings.png" width="250" alt="Settings">
 </div>
 
 </details>

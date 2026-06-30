@@ -101,7 +101,8 @@ struct SettingsView: View {
             }
             .navigationTitle("Settings")
             #if os(macOS)
-            .padding(.horizontal)
+            .formStyle(.grouped)
+            .frame(maxWidth: 600)
             #endif
         }
     }

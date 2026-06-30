@@ -22,6 +22,9 @@ struct ExportView: View {
                 )
             }
         }
+        #if os(macOS)
+        .buttonStyle(.plain)
+        #endif
     }
 
     private var progressView: some View {
@@ -96,6 +99,9 @@ struct ExportView: View {
             Spacer()
         }
         .padding()
+        #if os(macOS)
+        .buttonStyle(.plain)
+        #endif
     }
 
     private func exportedView(m4aURL: URL?, lrcURL: URL?) -> some View {

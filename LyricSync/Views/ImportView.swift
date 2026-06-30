@@ -51,6 +51,9 @@ struct ImportView: View {
 
             Spacer()
         }
+        #if os(macOS)
+        .buttonStyle(.plain)
+        #endif
         .fileImporter(
             isPresented: $viewModel.showFilePicker,
             allowedContentTypes: [.audio, .mp3, .mpeg4Audio, .wav, .aiff],

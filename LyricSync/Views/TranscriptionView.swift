@@ -148,7 +148,7 @@ struct TranscriptionView: View {
                     }
                     .presentationDetents([.medium, .large])
                 }
-            } else {
+                } else {
                 ContentUnavailableView(
                     "No song imported",
                     systemImage: "music.note",
@@ -156,6 +156,9 @@ struct TranscriptionView: View {
                 )
             }
         }
+        #if os(macOS)
+        .buttonStyle(.plain)
+        #endif
     }
 
     private func lyricList(song: Song) -> some View {
