@@ -1,0 +1,32 @@
+# Xcode
+*.xcworkspace
+xcuserdata/
+DerivedData/
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+*.xcbkptlist
+*.xcuserstate
+
+# Swift Package Manager
+.build/
+Package.resolved
+
+# CocoaPods
+Pods/
+
+# macOS
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Fastlane
+fastlane/report.xml
+fastlane/test_output
+
+# Signing
+**/*.mobileprovision
+**/*.provisionprofile

@@ -1,0 +1,45 @@
+name: LyricSync
+options:
+  bundleIdPrefix: com.lyricsync
+  deploymentTarget:
+    iOS: "17.0"
+    macOS: "14.0"
+  xcodeVersion: "16.0"
+
+settings:
+  SWIFT_VERSION: "6.0"
+  SDKROOT: auto
+
+targets:
+  LyricSync:
+    type: application
+    platform: [iOS, macOS]
+    sources:
+      - path: LyricSync
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.fares.lyricsync.333333
+      INFOPLIST_FILE: LyricSync/Info.plist
+      DEVELOPMENT_TEAM: YCV9AK482A
+      CODE_SIGN_STYLE: Automatic
+      CODE_SIGN_IDENTITY: Apple Development
+      TARGETED_DEVICE_FAMILY: "1,2"
+      IPHONEOS_DEPLOYMENT_TARGET: "17.0"
+      MACOSX_DEPLOYMENT_TARGET: "14.0"
+      MARKETING_VERSION: "1.0"
+      CURRENT_PROJECT_VERSION: "1"
+    entitlements:
+      path: LyricSync/LyricSync.entitlements
+    info:
+      path: LyricSync/Info.plist
+      properties:
+        LSRequiresIPhoneOS: true
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UILaunchScreen:
+          UIColorName: systemBackground
+        NSSpeechRecognitionUsageDescription: "LyricSync utilise la reconnaissance vocale on-device pour transcrire automatiquement les paroles de vos chansons."
+        NSMicrophoneUsageDescription: "LyricSync peut utiliser le microphone pour capturer l'audio à transcrire."
+        UIBackgroundModes:
+          - audio

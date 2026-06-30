@@ -1,0 +1,410 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		123FDE5D6C5D08883F3457B5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2E54ED43EFFC477476FA1F /* ContentView.swift */; };
+		24FA1E9D8E8B3142D1FC8395 /* LyricSyncApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1462F3AA3A5ECCF6BA0E48E /* LyricSyncApp.swift */; };
+		5A7EB4AC9FC87D9D5894C5C9 /* ImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4E749DA67A2BDB49260F95 /* ImportView.swift */; };
+		62BE48452FF1A94E002409EF /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BE48442FF1A94E002409EF /* KeychainHelper.swift */; };
+		62BE48472FF1A960002409EF /* MistralService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BE48462FF1A960002409EF /* MistralService.swift */; };
+		62BE48492FF1A972002409EF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BE48482FF1A972002409EF /* SettingsView.swift */; };
+		62F25E0B2FF4340000452B8B /* LyricSync.icon in Resources */ = {isa = PBXBuildFile; fileRef = 62F25E0A2FF4340000452B8B /* LyricSync.icon */; };
+		69BD3D256D942D66F741D70C /* TranscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411BF353E905482B39CAACAA /* TranscriptionService.swift */; };
+		6DE26719A590A0BF34F01E24 /* LyricsExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE48BD3B0B4FE352462151A7 /* LyricsExportService.swift */; };
+		73AC26F9EF7DD15F701CC962 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB2A9BC1FF9C2AB0E14CF037 /* Assets.xcassets */; };
+		9A37286E4855EA9CBD85F700 /* LyricsPostProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE448A80E7F9C3AC7895F54 /* LyricsPostProcessor.swift */; };
+		AD7C582CF1B405AEB78B969C /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A90409A90D31394AC92688 /* Song.swift */; };
+		B916AAC0D433BC129AD624B3 /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E3B444D2822F339BFED51D /* ExportView.swift */; };
+		BBFDE1FFAD1FBA703F37386F /* LyricLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C971184D7C99AE26F73480A2 /* LyricLine.swift */; };
+		D54A8E93BDBFE55C80A13382 /* TranscriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C67296D7FAAA69AFF38592 /* TranscriptionViewModel.swift */; };
+		F2FC219184E919CE29BE9E7E /* TranscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F504E235CAF9E263C56C88A9 /* TranscriptionView.swift */; };
+		F9680FFBA1587408A847511C /* AudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B41667C7E0FC2C2536D30E9 /* AudioService.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		10C67296D7FAAA69AFF38592 /* TranscriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionViewModel.swift; sourceTree = "<group>"; };
+		2B41667C7E0FC2C2536D30E9 /* AudioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioService.swift; sourceTree = "<group>"; };
+		368306FC05BC3C0BEF8D3E47 /* LyricSync.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LyricSync.entitlements; sourceTree = "<group>"; };
+		3B2E54ED43EFFC477476FA1F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		3BE448A80E7F9C3AC7895F54 /* LyricsPostProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsPostProcessor.swift; sourceTree = "<group>"; };
+		411BF353E905482B39CAACAA /* TranscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionService.swift; sourceTree = "<group>"; };
+		5F4E749DA67A2BDB49260F95 /* ImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportView.swift; sourceTree = "<group>"; };
+		62BE48442FF1A94E002409EF /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		62BE48462FF1A960002409EF /* MistralService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MistralService.swift; sourceTree = "<group>"; };
+		62BE48482FF1A972002409EF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		62F25E0A2FF4340000452B8B /* LyricSync.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = LyricSync.icon; sourceTree = "<group>"; };
+		6693829A88FB95C3CF868821 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		94E3B444D2822F339BFED51D /* ExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportView.swift; sourceTree = "<group>"; };
+		BE48BD3B0B4FE352462151A7 /* LyricsExportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsExportService.swift; sourceTree = "<group>"; };
+		C8A90409A90D31394AC92688 /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		C94FB79C975509C69FC9B705 /* LyricSync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LyricSync.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C971184D7C99AE26F73480A2 /* LyricLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricLine.swift; sourceTree = "<group>"; };
+		CB2A9BC1FF9C2AB0E14CF037 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F1462F3AA3A5ECCF6BA0E48E /* LyricSyncApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricSyncApp.swift; sourceTree = "<group>"; };
+		F504E235CAF9E263C56C88A9 /* TranscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		3F689838138061B6F53EA1DE /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				2B41667C7E0FC2C2536D30E9 /* AudioService.swift */,
+				62BE48442FF1A94E002409EF /* KeychainHelper.swift */,
+				BE48BD3B0B4FE352462151A7 /* LyricsExportService.swift */,
+				3BE448A80E7F9C3AC7895F54 /* LyricsPostProcessor.swift */,
+				62BE48462FF1A960002409EF /* MistralService.swift */,
+				411BF353E905482B39CAACAA /* TranscriptionService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		3F9C2366158C811062288F89 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C94FB79C975509C69FC9B705 /* LyricSync.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		86ABACFDC80424825D8A844E = {
+			isa = PBXGroup;
+			children = (
+				62F25E0A2FF4340000452B8B /* LyricSync.icon */,
+				B48007D981554F23E0CBA0D1 /* LyricSync */,
+				3F9C2366158C811062288F89 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B48007D981554F23E0CBA0D1 /* LyricSync */ = {
+			isa = PBXGroup;
+			children = (
+				CB2A9BC1FF9C2AB0E14CF037 /* Assets.xcassets */,
+				3B2E54ED43EFFC477476FA1F /* ContentView.swift */,
+				6693829A88FB95C3CF868821 /* Info.plist */,
+				368306FC05BC3C0BEF8D3E47 /* LyricSync.entitlements */,
+				F1462F3AA3A5ECCF6BA0E48E /* LyricSyncApp.swift */,
+				F108B2C872656880D82784A3 /* Models */,
+				3F689838138061B6F53EA1DE /* Services */,
+				F4CE5BB87FDAD4DB15E17213 /* ViewModels */,
+				C7C5BA9813733EEF589F2B2C /* Views */,
+			);
+			path = LyricSync;
+			sourceTree = "<group>";
+		};
+		C7C5BA9813733EEF589F2B2C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				94E3B444D2822F339BFED51D /* ExportView.swift */,
+				5F4E749DA67A2BDB49260F95 /* ImportView.swift */,
+				62BE48482FF1A972002409EF /* SettingsView.swift */,
+				F504E235CAF9E263C56C88A9 /* TranscriptionView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F108B2C872656880D82784A3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C971184D7C99AE26F73480A2 /* LyricLine.swift */,
+				C8A90409A90D31394AC92688 /* Song.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F4CE5BB87FDAD4DB15E17213 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				10C67296D7FAAA69AFF38592 /* TranscriptionViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7CFD5447653CF43F0C2B934C /* LyricSync */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E99B50CB08667B12C235118B /* Build configuration list for PBXNativeTarget "LyricSync" */;
+			buildPhases = (
+				9CC7B920F4C9B3175CA035A3 /* Sources */,
+				9BC3915E617DD73E30755B6B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LyricSync;
+			packageProductDependencies = (
+			);
+			productName = LyricSync;
+			productReference = C94FB79C975509C69FC9B705 /* LyricSync.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		27DCAB375A8944EED4403E0C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					7CFD5447653CF43F0C2B934C = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 0A43CACACB4BFA004470CA9E /* Build configuration list for PBXProject "LyricSync" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 86ABACFDC80424825D8A844E;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 3F9C2366158C811062288F89 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7CFD5447653CF43F0C2B934C /* LyricSync */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9BC3915E617DD73E30755B6B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73AC26F9EF7DD15F701CC962 /* Assets.xcassets in Resources */,
+				62F25E0B2FF4340000452B8B /* LyricSync.icon in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9CC7B920F4C9B3175CA035A3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				62BE48492FF1A972002409EF /* SettingsView.swift in Sources */,
+				62BE48472FF1A960002409EF /* MistralService.swift in Sources */,
+				F9680FFBA1587408A847511C /* AudioService.swift in Sources */,
+				123FDE5D6C5D08883F3457B5 /* ContentView.swift in Sources */,
+				B916AAC0D433BC129AD624B3 /* ExportView.swift in Sources */,
+				5A7EB4AC9FC87D9D5894C5C9 /* ImportView.swift in Sources */,
+				BBFDE1FFAD1FBA703F37386F /* LyricLine.swift in Sources */,
+				24FA1E9D8E8B3142D1FC8395 /* LyricSyncApp.swift in Sources */,
+				6DE26719A590A0BF34F01E24 /* LyricsExportService.swift in Sources */,
+				9A37286E4855EA9CBD85F700 /* LyricsPostProcessor.swift in Sources */,
+				62BE48452FF1A94E002409EF /* KeychainHelper.swift in Sources */,
+				AD7C582CF1B405AEB78B969C /* Song.swift in Sources */,
+				69BD3D256D942D66F741D70C /* TranscriptionService.swift in Sources */,
+				F2FC219184E919CE29BE9E7E /* TranscriptionView.swift in Sources */,
+				D54A8E93BDBFE55C80A13382 /* TranscriptionViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		11C46FC86FB84F18045D3416 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = LyricSync;
+				CODE_SIGN_ENTITLEMENTS = LyricSync/LyricSync.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YCV9AK482A;
+				INFOPLIST_FILE = LyricSync/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LyricSync;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fares.lyricsync.333333;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D8FCECE33B389ECB3102DD8C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		DF40C97E8D001E9352C0C93A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = LyricSync;
+				CODE_SIGN_ENTITLEMENTS = LyricSync/LyricSync.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YCV9AK482A;
+				INFOPLIST_FILE = LyricSync/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LyricSync;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fares.lyricsync.333333;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F0FDA3D0D8DB330DD832A3B8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0A43CACACB4BFA004470CA9E /* Build configuration list for PBXProject "LyricSync" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8FCECE33B389ECB3102DD8C /* Debug */,
+				F0FDA3D0D8DB330DD832A3B8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		E99B50CB08667B12C235118B /* Build configuration list for PBXNativeTarget "LyricSync" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				11C46FC86FB84F18045D3416 /* Debug */,
+				DF40C97E8D001E9352C0C93A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 27DCAB375A8944EED4403E0C /* Project object */;
+}
