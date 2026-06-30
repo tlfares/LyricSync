@@ -37,10 +37,10 @@ Download the latest release:
 <summary><b>Screenshots</b></summary>
 
 <div style="display: flex; gap: 10px; overflow-x: auto; padding: 10px 0;">
-  <img src="Screenshots/import.png" width="250" alt="Import">
-  <img src="Screenshots/transcription.png" width="250" alt="Transcription">
-  <img src="Screenshots/export.png" width="250" alt="Export">
-  <img src="Screenshots/settings.png" width="250" alt="Settings">
+  <img src="Screenshots/MainPage.png" width="250" alt="Import">
+  <img src="Screenshots/ReadyToTranscribe.png" width="250" alt="Ready to transcribe">
+  <img src="Screenshots/EditView.png" width="250" alt="Edit lyrics">
+  <img src="Screenshots/ExportView.png" width="250" alt="Export">
 </div>
 
 </details>

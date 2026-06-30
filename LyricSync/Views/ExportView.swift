@@ -70,7 +70,7 @@ struct ExportView: View {
 
                 if viewModel.exportMode != .m4aOnly {
                     Label {
-                        Text("LRC pour lecteurs génériques (VLC, foobar2000…)")
+                        Text("LRC pour lecteurs génériques")
                     } icon: {
                         Image(systemName: "doc.text")
                     }
@@ -166,7 +166,7 @@ struct ExportView: View {
 
                 if showLRC, let url = lrcURL {
                     ShareLink(item: url) {
-                        Label("Partager LRC (lecteurs génériques)", systemImage: "doc.text")
+                        Label("Partager LRC", systemImage: "doc.text")
                             .frame(maxWidth: .infinity)
                             .padding()
                             .background(.secondary)
