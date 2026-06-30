@@ -1,5 +1,9 @@
 # LyricSync
 
+<p align="center">
+  <img src="iconheader.png" width="120" alt="LyricSync">
+</p>
+
 **iOS/Mac app that transcribes and/or syncs lyrics from any audio file, using Apple Speech or Mistral AI.**
 
 Import a song, get lyrics with timestamps, and export ready-to-use files for any media player supporting LRC.
