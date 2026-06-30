@@ -39,7 +39,6 @@ class TranscriptionViewModel: ObservableObject {
         didSet { UserDefaults.standard.set(defaultOutputPath, forKey: "defaultOutputPath") }
     }
     @Published var selectedLocale: TranscriptionLocale = .english
-    @Published var recognitionMode: RecognitionMode = .onDevice
     @Published var exportMode: ExportMode = .both
     @Published var usePastedLyrics = false
     @Published var pastedLyrics: String = ""
@@ -251,27 +250,6 @@ struct MistralSettings {
     var enabled: Bool = false {
         didSet {
             UserDefaults.standard.set(enabled, forKey: "mistral_enabled")
-        }
-    }
-}
-
-enum RecognitionMode: String, CaseIterable, Identifiable {
-    case onDevice
-    case cloud
-
-    var id: String { rawValue }
-
-    var displayName: String {
-        switch self {
-        case .onDevice: return "On-device"
-        case .cloud: return "Cloud (PCC)"
-        }
-    }
-
-    var description: String {
-        switch self {
-        case .onDevice: return "Entièrement sur l'appareil, sans internet"
-        case .cloud: return "Apple Private Cloud Compute, plus précis"
         }
     }
 }

@@ -1,13 +1,13 @@
 # LyricSync
 
-**iOS/Mac app that transcribes and/or syncs lyrics from any audio file, using Apple Intelligence or Mistral AI.**
+**iOS/Mac app that transcribes and/or syncs lyrics from any audio file, using Apple Speech or Mistral AI.**
 
 Import a song, get lyrics with timestamps, and export ready-to-use files for any media player supporting LRC.
 
 ## Features
 
 - **Import any audio file** — M4A, MP3, WAV, AIFF
-- **Transcription** — Apple Intelligence : on-device or Private Cloud Compute, or Mistral AI Voxtral
+- **Transcription** — On-device (Apple Speech) or Mistral AI Voxtral
 - **Smart punctuation** — Mistral LLM perfects punctuation and line breaks where natural
 - **Paste existing lyrics** — You can also paste your own text to sync it.
 - **Export M4A** with embedded lyrics, sideloadable to the iOS Music app (but NOT synced as Apple refuses to display any synced lyrics for non-AppleMusic songs.

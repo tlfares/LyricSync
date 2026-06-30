@@ -101,23 +101,6 @@ struct TranscriptionView: View {
                             .foregroundStyle(.secondary)
                     }
 
-                    if !viewModel.mistralSettings.enabled {
-                        Picker("Mode", selection: $viewModel.recognitionMode) {
-                            ForEach(RecognitionMode.allCases) { mode in
-                                Text(mode.displayName).tag(mode)
-                            }
-                        }
-                        .pickerStyle(.segmented)
-                        .padding(.horizontal)
-                        .overlay(alignment: .bottom) {
-                            Text(viewModel.recognitionMode.description)
-                                .font(.caption2)
-                                .foregroundStyle(.tertiary)
-                                .offset(y: 18)
-                        }
-                        .padding(.bottom, 8)
-                    }
-
                     Button {
                         viewModel.startTranscription()
                     } label: {
