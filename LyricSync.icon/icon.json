@@ -30,7 +30,7 @@
               }
             }
           ],
-          "glass" : true,
+          "glass" : false,
           "image-name" : "music.note.list.svg",
           "name" : "music.note.list",
           "position" : {
