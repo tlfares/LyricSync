@@ -7,6 +7,19 @@
 **iOS/Mac app that transcribes and/or syncs lyrics from any audio file, using Apple Speech or Mistral AI.**
 
 Import a song, get lyrics with timestamps, and export ready-to-use files for any media player supporting LRC.
+<details>
+<summary><b>Screenshots</b></summary>
+
+<div style="display: flex; gap: 10px; overflow-x: auto; padding: 10px 0;">
+  <img src="Screenshots/MainPage.png" width="250" alt="Import">
+  <img src="Screenshots/ReadyToTranscribe.png" width="250" alt="Ready to transcribe">
+  <img src="Screenshots/EditView.png" width="250" alt="Edit lyrics">
+  <img src="Screenshots/ExportView.png" width="250" alt="Export">
+  <img src="Screenshots/Settings.png" width="250" alt="Settings">
+</div>
+
+</details>
+
 
 ## Features
 
@@ -38,15 +51,4 @@ Download the latest release:
 - Export the LRC file (timestamped text file to use with a compatible player) or m4a (non synced transcription displayable by the Apple Music app)
 
 
-<details>
-<summary><b>Screenshots</b></summary>
 
-<div style="display: flex; gap: 10px; overflow-x: auto; padding: 10px 0;">
-  <img src="Screenshots/MainPage.png" width="250" alt="Import">
-  <img src="Screenshots/ReadyToTranscribe.png" width="250" alt="Ready to transcribe">
-  <img src="Screenshots/EditView.png" width="250" alt="Edit lyrics">
-  <img src="Screenshots/ExportView.png" width="250" alt="Export">
-  <img src="Screenshots/Settings.png" width="250" alt="Settings">
-</div>
-
-</details>
