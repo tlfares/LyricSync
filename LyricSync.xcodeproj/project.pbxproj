@@ -24,6 +24,8 @@
 		D54A8E93BDBFE55C80A13382 /* TranscriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C67296D7FAAA69AFF38592 /* TranscriptionViewModel.swift */; };
 		F2FC219184E919CE29BE9E7E /* TranscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F504E235CAF9E263C56C88A9 /* TranscriptionView.swift */; };
 		F9680FFBA1587408A847511C /* AudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B41667C7E0FC2C2536D30E9 /* AudioService.swift */; };
+		AABBCCDD00112233445566778899AABB /* WaveformData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCCDDEE11223344556677889900BBCC /* WaveformData.swift */; };
+		CCDDEEFF22334455667788990011CCDD /* WaveformEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEEFFAA33445566778899001122DDEE /* WaveformEditorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +49,8 @@
 		CB2A9BC1FF9C2AB0E14CF037 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F1462F3AA3A5ECCF6BA0E48E /* LyricSyncApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricSyncApp.swift; sourceTree = "<group>"; };
 		F504E235CAF9E263C56C88A9 /* TranscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionView.swift; sourceTree = "<group>"; };
+		BBCCDDEE11223344556677889900BBCC /* WaveformData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformData.swift; sourceTree = "<group>"; };
+		DDEEFFAA33445566778899001122DDEE /* WaveformEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformEditorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -103,6 +107,7 @@
 				5F4E749DA67A2BDB49260F95 /* ImportView.swift */,
 				62BE48482FF1A972002409EF /* SettingsView.swift */,
 				F504E235CAF9E263C56C88A9 /* TranscriptionView.swift */,
+				DDEEFFAA33445566778899001122DDEE /* WaveformEditorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -112,6 +117,7 @@
 			children = (
 				C971184D7C99AE26F73480A2 /* LyricLine.swift */,
 				C8A90409A90D31394AC92688 /* Song.swift */,
+				BBCCDDEE11223344556677889900BBCC /* WaveformData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -210,6 +216,8 @@
 				69BD3D256D942D66F741D70C /* TranscriptionService.swift in Sources */,
 				F2FC219184E919CE29BE9E7E /* TranscriptionView.swift in Sources */,
 				D54A8E93BDBFE55C80A13382 /* TranscriptionViewModel.swift in Sources */,
+				AABBCCDD00112233445566778899AABB /* WaveformData.swift in Sources */,
+				CCDDEEFF22334455667788990011CCDD /* WaveformEditorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

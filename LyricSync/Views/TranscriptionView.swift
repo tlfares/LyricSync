@@ -5,6 +5,14 @@ struct TranscriptionView: View {
     @State private var showLanguageSheet = false
     @FocusState private var focusedLineID: UUID?
 
+    private struct TimeEditorContext: Identifiable, Equatable {
+        let id = UUID()
+        let lineID: UUID
+        let currentTime: TimeInterval
+        let text: String
+    }
+    @State private var timeEditorContext: TimeEditorContext?
+
     private enum QuickLang: String, CaseIterable {
         case french, english, other
     }
@@ -101,19 +109,25 @@ struct TranscriptionView: View {
                             .foregroundStyle(.secondary)
                     }
 
+                    let isMistral = viewModel.mistralSettings.enabled
+                    let buttonColor: Color = isMistral ? Color(red: 1, green: 0.4157, blue: 0) : .accentColor
                     Button {
                         viewModel.startTranscription()
                     } label: {
                         Label(
-                            viewModel.usePastedLyrics ? "Sync with audio" : "Start transcription",
+                            isMistral ? "Transcript with Mistral" : viewModel.usePastedLyrics ? "Sync with audio" : "Start transcription",
                             systemImage: "play.fill"
                         )
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(Color.accentColor)
+                            .background(buttonColor)
                             .foregroundColor(.white)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
+                    #if os(macOS)
+                    .buttonStyle(.borderedProminent)
+                    .tint(buttonColor)
+                    #endif
                     .disabled(viewModel.usePastedLyrics && viewModel.pastedLyrics.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                     .padding(.horizontal, 40)
                 }
@@ -121,19 +135,19 @@ struct TranscriptionView: View {
                 .sheet(isPresented: $showLanguageSheet) {
                     NavigationStack {
                         List(TranscriptionLocale.allCases.filter { $0 != .french && $0 != .english }) { locale in
-                            Button {
+                            HStack {
+                                Text(locale.displayName)
+                                    .foregroundStyle(.primary)
+                                Spacer()
+                                if viewModel.selectedLocale == locale {
+                                    Image(systemName: "checkmark")
+                                        .foregroundStyle(.tint)
+                                }
+                            }
+                            .contentShape(Rectangle())
+                            .onTapGesture {
                                 viewModel.selectedLocale = locale
                                 showLanguageSheet = false
-                            } label: {
-                                HStack {
-                                    Text(locale.displayName)
-                                        .foregroundStyle(.primary)
-                                    Spacer()
-                                    if viewModel.selectedLocale == locale {
-                                        Image(systemName: "checkmark")
-                                            .foregroundStyle(.tint)
-                                    }
-                                }
                             }
                         }
                         .navigationTitle("Choose a language")
@@ -146,7 +160,11 @@ struct TranscriptionView: View {
                             }
                         }
                     }
+                    #if os(iOS)
                     .presentationDetents([.medium, .large])
+                    #else
+                    .frame(minWidth: 300, minHeight: 400)
+                    #endif
                 }
                 } else {
                 ContentUnavailableView(
@@ -159,6 +177,29 @@ struct TranscriptionView: View {
         #if os(macOS)
         .buttonStyle(.plain)
         #endif
+        .onChange(of: timeEditorContext) { _, _ in
+            NotificationCenter.default.post(name: .waveformStopAll, object: nil)
+        }
+        .onDisappear {
+            NotificationCenter.default.post(name: .waveformStopAll, object: nil)
+        }
+        .sheet(item: $timeEditorContext) { context in
+            if let song = viewModel.song {
+                WaveformEditorView(
+                    audioURL: song.originalURL,
+                    initialTime: context.currentTime,
+                    verseText: context.text,
+                    onConfirm: { newTime in
+                        viewModel.updateLyricLineTime(id: context.lineID, newTime: newTime)
+                        timeEditorContext = nil
+                    },
+                    onCancel: {
+                        timeEditorContext = nil
+                    }
+                )
+                .id(context.id)
+            }
+        }
     }
 
     private func lyricList(song: Song) -> some View {
@@ -169,8 +210,12 @@ struct TranscriptionView: View {
                         HStack {
                             Text(formatTimestamp(line.timeOffset))
                                 .font(.caption)
-                                .foregroundStyle(.secondary)
+                                .foregroundStyle(.tint)
                                 .monospacedDigit()
+                                .onTapGesture {
+                                    timeEditorContext = TimeEditorContext(lineID: line.id, currentTime: line.timeOffset, text: line.text)
+                                }
+                                .help("Adjust timing")
 
                             Spacer()
 
@@ -189,8 +234,25 @@ struct TranscriptionView: View {
                         .textFieldStyle(.plain)
                         .font(.body)
                         .focused($focusedLineID, equals: line.id)
+
+                        HStack {
+                            Spacer()
+                            Button {
+                                if let idx = song.lyrics.firstIndex(where: { $0.id == line.id }) {
+                                    viewModel.insertLyricLine(at: idx + 1)
+                                }
+                            } label: {
+                                Label("Add verse", systemImage: "plus.circle")
+                                    .font(.caption)
+                                    .foregroundStyle(.tertiary)
+                            }
+                            .buttonStyle(.plain)
+                        }
                     }
                     .padding(.vertical, 4)
+                }
+                .onDelete { indexSet in
+                    viewModel.deleteLyricLine(at: indexSet)
                 }
             } header: {
                 HStack {
@@ -200,6 +262,14 @@ struct TranscriptionView: View {
                         .foregroundStyle(.secondary)
                 }
             }
+
+            Button {
+                viewModel.insertLyricLine(at: song.lyrics.count)
+            } label: {
+                Label("Add verse", systemImage: "plus")
+            }
+            .buttonStyle(.plain)
+            .foregroundStyle(.tint)
         }
         #if os(iOS)
         .listStyle(.insetGrouped)
@@ -209,7 +279,7 @@ struct TranscriptionView: View {
         .toolbar {
             ToolbarItemGroup(placement: .keyboard) {
                 Spacer()
-                                Button("Done") { focusedLineID = nil }
+                Button("Done") { focusedLineID = nil }
             }
         }
     }

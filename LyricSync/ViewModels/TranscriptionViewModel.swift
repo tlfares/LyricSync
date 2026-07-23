@@ -40,6 +40,7 @@ class TranscriptionViewModel: ObservableObject {
     }
     @Published var selectedLocale: TranscriptionLocale = .english
     @Published var exportMode: ExportMode = .both
+    @Published var lrcNamingFormat: LyricsExportService.NamingFormat = .artistTitle
     @Published var usePastedLyrics = false
     @Published var pastedLyrics: String = ""
     @Published var mistralSettings = MistralSettings()
@@ -66,6 +67,14 @@ class TranscriptionViewModel: ObservableObject {
     }
 
     func importAudio(url: URL) {
+        exportedM4AURL = nil
+        exportedLRCURL = nil
+        progress = 0
+        usePastedLyrics = false
+        pastedLyrics = ""
+        error = nil
+        NotificationCenter.default.post(name: Notification.Name("waveformStopAllAudio"), object: nil)
+
         Task {
             do {
                 progressMessage = "Importing audio file..."
@@ -83,12 +92,15 @@ class TranscriptionViewModel: ObservableObject {
                 var title = url.deletingPathExtension().lastPathComponent
                 var artist = "Unknown artist"
 
+                var album = ""
                 if let metadata = try? await asset.load(.commonMetadata) {
                     for item in metadata {
                         if item.commonKey == .commonKeyTitle {
                             title = (try? await item.load(.value)) as? String ?? title
                         } else if item.commonKey == .commonKeyArtist {
                             artist = (try? await item.load(.value)) as? String ?? artist
+                        } else if item.commonKey == .commonKeyAlbumName {
+                            album = (try? await item.load(.value)) as? String ?? album
                         }
                     }
                 }
@@ -96,6 +108,7 @@ class TranscriptionViewModel: ObservableObject {
                 let song = Song(
                     title: title,
                     artist: artist,
+                    album: album,
                     originalURL: sandboxURL,
                     duration: durationSecs
                 )
@@ -119,7 +132,6 @@ class TranscriptionViewModel: ObservableObject {
                     && !mistralSettings.apiKey.isEmpty
                     && !usePastedLyrics
 
-                // — Mistral : transcription + timestamps en un appel —
                 if useMistral {
                     progressMessage = "Transcribing with Mistral..."
                     let lyrics = try await MistralService.transcribe(
@@ -132,7 +144,10 @@ class TranscriptionViewModel: ObservableObject {
                         throw TranscriptionService.TranscriptionError.noResult
                     }
 
-                    self.song?.lyrics = lyrics
+                    let advance: TimeInterval = 0.15
+                    self.song?.lyrics = lyrics.map {
+                        LyricLine(text: $0.text, timeOffset: max(0, $0.timeOffset - advance), duration: $0.duration, confidence: $0.confidence)
+                    }
                 } else {
                     // — Mode normal (Apple uniquement) —
                     progressMessage = usePastedLyrics ? "Syncing..." : "Transcribing..."
@@ -176,21 +191,21 @@ class TranscriptionViewModel: ObservableObject {
                 switch exportMode {
                 case .both:
                     progressMessage = "Exporting M4A + LRC..."
-                    let url = try await exportService.exportWithLyrics(song: song, outputDir: outputDir)
+                    let url = try await exportService.exportWithLyrics(song: song, outputDir: outputDir, namingFormat: lrcNamingFormat)
                     exportedM4AURL = url
                     do {
-                        exportedLRCURL = try await exportService.exportLRC(song: song, outputDir: outputDir)
+                        exportedLRCURL = try await exportService.exportLRC(song: song, outputDir: outputDir, namingFormat: lrcNamingFormat)
                     } catch {
                         exportedLRCURL = nil
                     }
                 case .m4aOnly:
                     progressMessage = "Exporting M4A..."
-                    let url = try await exportService.exportWithLyrics(song: song, outputDir: outputDir)
+                    let url = try await exportService.exportWithLyrics(song: song, outputDir: outputDir, namingFormat: lrcNamingFormat)
                     exportedM4AURL = url
                     exportedLRCURL = nil
                 case .lrcOnly:
                     progressMessage = "Exporting LRC..."
-                    let url = try await exportService.exportLRC(song: song, outputDir: outputDir)
+                    let url = try await exportService.exportLRC(song: song, outputDir: outputDir, namingFormat: lrcNamingFormat)
                     exportedLRCURL = url
                     exportedM4AURL = nil
                 }
@@ -217,6 +232,22 @@ class TranscriptionViewModel: ObservableObject {
     func updateLyricLine(id: UUID, newText: String) {
         guard let index = song?.lyrics.firstIndex(where: { $0.id == id }) else { return }
         song?.lyrics[index].text = newText
+    }
+
+    func insertLyricLine(at index: Int) {
+        guard let count = song?.lyrics.count, index >= 0, index <= count else { return }
+        let previousTime = (index > 0) ? (song?.lyrics[index - 1].timeOffset ?? 0) : 0
+        let newLine = LyricLine(text: "", timeOffset: previousTime, duration: 0, confidence: 1)
+        song?.lyrics.insert(newLine, at: index)
+    }
+
+    func deleteLyricLine(at indexSet: IndexSet) {
+        song?.lyrics.remove(atOffsets: indexSet)
+    }
+
+    func updateLyricLineTime(id: UUID, newTime: TimeInterval) {
+        guard let index = song?.lyrics.firstIndex(where: { $0.id == id }) else { return }
+        song?.lyrics[index].timeOffset = newTime
     }
 
     func testMistralConnection() async {

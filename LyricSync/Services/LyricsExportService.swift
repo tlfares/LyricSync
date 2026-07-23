@@ -2,6 +2,20 @@ import Foundation
 import AVFoundation
 
 actor LyricsExportService {
+    enum NamingFormat: String, CaseIterable, Identifiable {
+        case title
+        case artistTitle
+        case artistAlbumTitle
+        var id: String { rawValue }
+        var displayName: String {
+            switch self {
+            case .title: return "Title.lrc"
+            case .artistTitle: return "Artist - Title.lrc (recommended)"
+            case .artistAlbumTitle: return "Artist - Album - Title.lrc"
+            }
+        }
+    }
+
     enum ExportError: Error, LocalizedError {
         case exportFailed(Error?)
         case noAudioTrack
@@ -20,10 +34,10 @@ actor LyricsExportService {
         }
     }
 
-    func exportWithLyrics(song: Song, outputDir: URL? = nil) async throws -> URL {
+    func exportWithLyrics(song: Song, outputDir: URL? = nil, namingFormat: NamingFormat = .artistTitle) async throws -> URL {
         let asset = AVAsset(url: song.originalURL)
         let baseDir = outputDir ?? FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let outputURL = baseDir.appendingPathComponent("\(song.title)_lyrics.m4a")
+        let outputURL = baseDir.appendingPathComponent("\(filename(for: song, format: namingFormat)).m4a")
         try? FileManager.default.removeItem(at: outputURL)
 
         let originalMetadata = (try? await loadAllMetadata(asset: asset)) ?? []
@@ -142,9 +156,9 @@ actor LyricsExportService {
 
     // MARK: - LRC Export
 
-    func exportLRC(song: Song, outputDir: URL? = nil) async throws -> URL {
+    func exportLRC(song: Song, outputDir: URL? = nil, namingFormat: NamingFormat = .artistTitle) async throws -> URL {
         let baseDir = outputDir ?? FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let outputURL = baseDir.appendingPathComponent("\(song.title).lrc")
+        let outputURL = baseDir.appendingPathComponent("\(filename(for: song, format: namingFormat)).lrc")
         try? FileManager.default.removeItem(at: outputURL)
 
         var lines: [String] = []
@@ -157,6 +171,33 @@ actor LyricsExportService {
         let content = lines.joined(separator: "\n") + "\n"
         try content.write(to: outputURL, atomically: true, encoding: .utf8)
         return outputURL
+    }
+
+    private func filename(for song: Song, format: NamingFormat) -> String {
+        let cleanArtist = song.artist
+            .trimmingCharacters(in: .whitespaces)
+            .replacingOccurrences(of: "/", with: ":")
+        let cleanTitle = song.title
+            .trimmingCharacters(in: .whitespaces)
+            .replacingOccurrences(of: "/", with: ":")
+        let cleanAlbum = (song.album ?? "")
+            .trimmingCharacters(in: .whitespaces)
+            .replacingOccurrences(of: "/", with: ":")
+        switch format {
+        case .title:
+            return cleanTitle
+        case .artistTitle:
+            let isGeneric = cleanArtist.isEmpty || cleanArtist == "Unknown artist"
+            if isGeneric { return cleanTitle }
+            return "\(cleanArtist) - \(cleanTitle)"
+        case .artistAlbumTitle:
+            let isGenericArtist = cleanArtist.isEmpty || cleanArtist == "Unknown artist"
+            let isGenericAlbum = cleanAlbum.isEmpty || cleanAlbum == "Unknown album"
+            if isGenericArtist && isGenericAlbum { return cleanTitle }
+            if isGenericArtist { return "\(cleanAlbum) - \(cleanTitle)" }
+            if isGenericAlbum { return "\(cleanArtist) - \(cleanTitle)" }
+            return "\(cleanArtist) - \(cleanAlbum) - \(cleanTitle)"
+        }
     }
 
     private func buildMetadata(from song: Song, original: [AVMetadataItem]) -> [AVMutableMetadataItem] {

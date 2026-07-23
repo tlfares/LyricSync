@@ -22,9 +22,6 @@ struct ExportView: View {
                 )
             }
         }
-        #if os(macOS)
-        .buttonStyle(.plain)
-        #endif
     }
 
     private var progressView: some View {
@@ -55,6 +52,16 @@ struct ExportView: View {
             }
             .pickerStyle(.segmented)
             .padding(.horizontal)
+
+            if viewModel.exportMode != .m4aOnly {
+                Picker("LRC title format", selection: $viewModel.lrcNamingFormat) {
+                    ForEach(LyricsExportService.NamingFormat.allCases) { fmt in
+                        Text(fmt.displayName).tag(fmt)
+                    }
+                }
+                .pickerStyle(.menu)
+                .padding(.horizontal)
+            }
 
             VStack(alignment: .leading, spacing: 8) {
                 Label {
@@ -94,14 +101,15 @@ struct ExportView: View {
                     .foregroundColor(.white)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
             }
+            #if os(macOS)
+            .buttonStyle(.borderedProminent)
+            .tint(Color.accentColor)
+            #endif
             .padding(.horizontal, 40)
 
             Spacer()
         }
         .padding()
-        #if os(macOS)
-        .buttonStyle(.plain)
-        #endif
     }
 
     private func exportedView(m4aURL: URL?, lrcURL: URL?) -> some View {
@@ -149,10 +157,9 @@ struct ExportView: View {
                     Label("Show in Finder", systemImage: "folder")
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.accentColor)
-                        .foregroundColor(.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
                 }
+                .buttonStyle(.borderedProminent)
+                .tint(Color.accentColor)
                 .padding(.horizontal, 40)
                 #endif
             }
